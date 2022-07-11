@@ -28,5 +28,4 @@ describe('1 - Teste a função fetchProducts', () => {
     const noParameter = await fetchProducts();
     expect(noParameter).toEqual(new Error('You must provide an url'));
   });
-
 });

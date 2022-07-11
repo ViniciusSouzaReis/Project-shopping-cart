@@ -38,4 +38,14 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   return li;
 };
 
-window.onload = () => { };
+const filterJson = async () => {
+  const getValues = await fetchProducts('computador');
+  const getResult = await getValues.results;
+  const getSection = document.querySelector('.items');
+  getResult.forEach((element) => {
+    const obj = { sku: element.id, name: element.title, image: element.thumbnail };
+    getSection.appendChild(createProductItemElement(obj));
+  });
+};
+
+window.onload = () => { filterJson(); };
