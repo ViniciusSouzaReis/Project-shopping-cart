@@ -30,6 +30,7 @@ const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').inn
 
 const cartItemClickListener = (event) => {
   // coloque seu código aqui
+  event.target.remove();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -53,7 +54,7 @@ const filterApiReturn = async () => {
 const createList = async (parameter) => {
   const getOl = document.querySelector('.cart__items');
   const getValues = await fetchItem(parameter);
-  const obj = await { sku: getValues.id, name: getValues.title, salePrice: getValues.price };
+  const obj = { sku: getValues.id, name: getValues.title, salePrice: getValues.price };
   getOl.appendChild(createCartItemElement(obj));
 };
 
