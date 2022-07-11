@@ -1,3 +1,5 @@
+const getBody = document.querySelector('body');
+
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -38,7 +40,7 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   return li;
 };
 
-const filterJson = async () => {
+const filterApiReturn = async () => {
   const getValues = await fetchProducts('computador');
   const getResult = await getValues.results;
   const getSection = document.querySelector('.items');
@@ -48,4 +50,20 @@ const filterJson = async () => {
   });
 };
 
-window.onload = () => { filterJson(); };
+const createList = async (parameter) => {
+  const getOl = document.querySelector('.cart__items');
+  const getValues = await fetchItem(parameter);
+  const obj = await { sku: getValues.id, name: getValues.title, salePrice: getValues.price };
+  getOl.appendChild(createCartItemElement(obj));
+};
+
+getBody.addEventListener('click', (event) => {
+  if (event.target.classList.contains('item__add')) {
+    const getItemId = event.target.parentNode.firstChild.innerText;
+    createList(getItemId);
+  }
+});
+
+window.onload = () => { 
+  filterApiReturn(); 
+};

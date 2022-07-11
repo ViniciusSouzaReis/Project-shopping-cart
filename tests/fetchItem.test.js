@@ -25,7 +25,7 @@ describe('2 - Teste a função fetchItem', () => {
   });
 
   it('Testa se, ao chamar a função fetchItem sem argumento, retorna um erro com a mensagem: "You must provide an url"', async () => {
-    const noParameter = await fetchItem('MLB1615760527');
+    const noParameter = await fetchItem();
     expect(noParameter).toEqual(new Error('You must provide an url'));
   });
 });
