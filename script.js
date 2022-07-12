@@ -1,4 +1,5 @@
 const getBody = document.querySelector('body');
+const selectBtnDelete = document.querySelector('.empty-cart');
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -56,6 +57,7 @@ const createList = async (parameter) => {
   const getValues = await fetchItem(parameter);
   const obj = { sku: getValues.id, name: getValues.title, salePrice: getValues.price };
   getOl.appendChild(createCartItemElement(obj));
+  saveCartItems();
 };
 
 getBody.addEventListener('click', (event) => {
@@ -65,6 +67,18 @@ getBody.addEventListener('click', (event) => {
   }
 });
 
+const deletelist = () => {
+  const liList = document.querySelectorAll('li');
+  liList.forEach((li) => {
+    if (li.classList.contains('cart__item')) {
+      li.remove();
+    }
+  });
+};
+
+selectBtnDelete.addEventListener('click', deletelist);
+
 window.onload = () => { 
-  filterApiReturn(); 
+  filterApiReturn();
+  getSavedCartItems(); 
 };
