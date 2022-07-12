@@ -1,5 +1,6 @@
 const getBody = document.querySelector('body');
 const selectBtnDelete = document.querySelector('.empty-cart');
+const selectOrdenatedList = document.querySelector('ol');
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -77,9 +78,24 @@ const deletelist = () => {
   });
 };
 
+const putNewClass = () => {
+  const liList = document.querySelectorAll('li');
+  liList.forEach((element) => {
+    if (element.classList.contains('cart__item')) {
+      element.classList.add('remove');
+    }
+  });
+};
+
+const deleteAfterLoad = (event) => {
+  event.target.remove();
+};
+
 selectBtnDelete.addEventListener('click', deletelist);
+selectOrdenatedList.addEventListener('click', deleteAfterLoad);
 
 window.onload = () => { 
   filterApiReturn();
-  getSavedCartItems(); 
+  getSavedCartItems();
+  putNewClass(); 
 };
