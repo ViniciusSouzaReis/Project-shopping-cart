@@ -58,6 +58,7 @@ const createList = async (parameter) => {
   const obj = { sku: getValues.id, name: getValues.title, salePrice: getValues.price };
   getOl.appendChild(createCartItemElement(obj));
   saveCartItems();
+  getSkuFromProductItem();
 };
 
 getBody.addEventListener('click', (event) => {
